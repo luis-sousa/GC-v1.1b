@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="416.0" prefWidth="448.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RubricaController">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+    <children>
+        <Label layoutX="185.0" layoutY="37.0" prefHeight="25.0" prefWidth="53.0" text="Rubrica" />
+        <Button fx:id="btInserir" layoutX="317.0" layoutY="81.0" mnemonicParsing="false" onAction="#btInsertFired" prefHeight="35.0" prefWidth="75.0" text="Inserir" />
+        <TextField fx:id="txtRubrica" layoutX="240.0" layoutY="37.0" prefHeight="25.0" prefWidth="194.0" />
+        <AnchorPane layoutY="-1.0" prefHeight="416.0" prefWidth="180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <TableView fx:id="tbRubrica" prefHeight="431.0" prefWidth="180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                        <TableColumn fx:id="clRubrica" prefWidth="178.0" text="Rubrica" />
+                    </columns>
+                </TableView>
+            </children>
+        </AnchorPane>
+        <Label fx:id="lbRubrica" layoutX="184.5048828125" layoutY="14.0" styleClass="errorLabel" />
+        <Button fx:id="btNova" layoutX="242.0" layoutY="81.0" mnemonicParsing="false" onAction="#btNewFired" prefHeight="35.0" prefWidth="69.0" text="Nova" />
+        <Button fx:id="btRemover" layoutX="242.0" layoutY="122.0" mnemonicParsing="false" onAction="#btDeleteFired" prefHeight="35.0" prefWidth="149.0" text="Eliminar" />
+    </children>
+</AnchorPane>

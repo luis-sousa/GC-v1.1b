@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="468.0" prefWidth="767.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SubOrcamentoPT4Controller">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+    <children>
+        <TableView fx:id="tbFraccaoQuotasOrcamento" layoutX="122.0" layoutY="70.0" prefHeight="278.0" prefWidth="537.0" AnchorPane.leftAnchor="124.0" AnchorPane.rightAnchor="106.0">
+            <columns>
+                <TableColumn fx:id="clFraccao" prefWidth="61.0" text="Fração" />
+                <TableColumn fx:id="clNome" prefWidth="182.0" text="Nome" />
+                <TableColumn fx:id="clPerm" prefWidth="57.0" text="Perm" />
+                <TableColumn fx:id="clMensal" prefWidth="72.0" text="Mensal" />
+                <TableColumn fx:id="clAnual" prefWidth="88.0" text="Anual" />
+                <TableColumn fx:id="clAno" prefWidth="75.0" text="Ano" />
+            </columns>
+        </TableView>
+        <Label prefHeight="45.0" prefWidth="767.0" text="                                                                     Cálculos das Quotas Mensais e Anuais." textAlignment="CENTER">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Button fx:id="btAnterior" layoutX="281.0" layoutY="393.0" mnemonicParsing="false" onAction="#btPreviousFired" prefHeight="53.0" prefWidth="149.0" text="Passo Anterior" />
+        <Button fx:id="btSair" layoutX="546.0" layoutY="393.0" mnemonicParsing="false" onAction="#btFinishFired" prefHeight="53.0" prefWidth="149.0" text="Sair" />
+        <Label fx:id="lbInfo" layoutX="239.0" layoutY="44.0" prefHeight="17.0" prefWidth="381.0" /><Label layoutX="191.0" layoutY="355.0" prefHeight="19.0" prefWidth="457.0" text="Nota: Todas as mensalidades são acertadas em Dezembro">
+<font>
+<Font name="System Bold" size="13.0" />
+</font>
+</Label>
+    </children>
+</AnchorPane>

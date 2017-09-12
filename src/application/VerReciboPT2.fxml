@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="716.0" prefWidth="900.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VerReciboControllerPT2">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+    <children>
+        <StackPane fx:id="pane" layoutX="-19.0" layoutY="238.0" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="94.0" AnchorPane.leftAnchor="213.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <ListView fx:id="lvRecibo" layoutY="7.0" prefHeight="562.0" prefWidth="213.0" AnchorPane.bottomAnchor="231.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <Button fx:id="btFiltrar" layoutX="16.0" layoutY="635.0" mnemonicParsing="false" onAction="#btFiltrarFired" prefHeight="19.0" prefWidth="77.0" text="Filtrar" AnchorPane.bottomAnchor="123.0" />
+        <TextField fx:id="txtFraccao" layoutX="76.0" layoutY="588.0" prefHeight="25.0" prefWidth="100.0" AnchorPane.bottomAnchor="180.0" />
+        <Label layoutX="16.0" layoutY="592.0" text="Fração" AnchorPane.bottomAnchor="184.0" />
+        <Button fx:id="btMail" layoutX="100.0" layoutY="635.0" mnemonicParsing="false" onAction="#btSendMailFired" text="Enviar Mail" AnchorPane.bottomAnchor="123.0" />
+        <ListView fx:id="lvInfo" layoutY="700.0" prefHeight="94.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+        <Label layoutX="5.0" layoutY="682.0" prefHeight="15.0" prefWidth="50.0" text="Info" AnchorPane.bottomAnchor="94.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="845.0" />
+    </children>
+</AnchorPane>

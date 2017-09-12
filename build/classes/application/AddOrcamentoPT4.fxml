@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="642.0" prefWidth="767.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrcamentoControllerPT4">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+    <children>
+        <TableView fx:id="tbFraccaoQuotasOrcamento" layoutX="122.0" layoutY="70.0" prefHeight="253.0" prefWidth="537.0" AnchorPane.leftAnchor="124.0" AnchorPane.rightAnchor="106.0">
+            <columns>
+                <TableColumn fx:id="clFraccao" prefWidth="61.0" text="Fração" />
+                <TableColumn fx:id="clNome" prefWidth="182.0" text="Nome" />
+                <TableColumn fx:id="clPerm" prefWidth="57.0" text="Perm" />
+                <TableColumn fx:id="clMensal" prefWidth="72.0" text="Mensal" />
+                <TableColumn fx:id="clAnual" prefWidth="88.0" text="Anual" />
+                <TableColumn fx:id="clAno" prefWidth="75.0" text="Ano" />
+            </columns>
+        </TableView>
+        <Label prefHeight="45.0" prefWidth="767.0" text="                                                                     Cálculos das Quotas Mensais e Anuais." textAlignment="CENTER">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Button fx:id="btAnterior" layoutX="280.0" layoutY="575.0" mnemonicParsing="false" onAction="#btPreviousFired" prefHeight="53.0" prefWidth="149.0" text="Passo Anterior" />
+        <TableView fx:id="tbObservacoes" layoutX="53.0" layoutY="387.0" prefHeight="192.0" prefWidth="136.0">
+            <columns>
+                <TableColumn fx:id="clFraccaoObs" prefWidth="59.0" text="Fração" /><TableColumn fx:id="clObs" prefWidth="75.0" text="Obs" />
+            </columns>
+        </TableView>
+        <Label layoutX="53.0" layoutY="356.0" prefHeight="19.0" prefWidth="119.0" text="Observações:">
+            <font>
+                <Font name="System Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label layoutX="213.0" layoutY="388.0" text="Fração" />
+        <TextArea fx:id="txtaObs" layoutX="264.0" layoutY="431.0" prefHeight="94.0" prefWidth="241.0" />
+        <Label layoutX="198.0" layoutY="431.0" text="Descrição" />
+        <Button fx:id="btNova" layoutX="551.0" layoutY="427.0" mnemonicParsing="false" onAction="#btNewFired" prefHeight="35.0" prefWidth="69.0" text="Nova" />
+        <Button fx:id="btInserir" layoutX="624.0" layoutY="427.0" mnemonicParsing="false" onAction="#btInsertFired" prefHeight="35.0" prefWidth="75.0" text="Inserir" />
+        <Button fx:id="btEditar" layoutX="550.0" layoutY="505.0" mnemonicParsing="false" onAction="#btEditFired" prefHeight="35.0" prefWidth="149.0" text="Editar" />
+        <Button fx:id="btRemover" layoutX="550.0" layoutY="466.0" mnemonicParsing="false" onAction="#btRemoveFired" prefHeight="35.0" prefWidth="149.0" text="Remover" />
+        <Button fx:id="btSair" layoutX="550.0" layoutY="575.0" mnemonicParsing="false" onAction="#btFinishFired" prefHeight="53.0" prefWidth="149.0" text="Sair" />
+        <ComboBox fx:id="cbFraccao" layoutX="262.0" layoutY="384.0" prefWidth="150.0" /><Label fx:id="lbDescricao" layoutX="263.0" layoutY="411.0" prefHeight="17.0" prefWidth="150.0" styleClass="errorLabel" /><Label fx:id="lbInfo" layoutX="239.0" layoutY="44.0" prefHeight="17.0" prefWidth="381.0" /><Label layoutX="206.0" layoutY="330.0" prefHeight="19.0" prefWidth="529.0" text="Nota: Todas as mensalidades são acertadas em Dezembro">
+<font>
+<Font name="System Bold" size="13.0" />
+</font></Label>
+    </children>
+</AnchorPane>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="479.0" prefWidth="767.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrcamentoControllerPT3">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+    <children>
+        <Button fx:id="btInserir" layoutX="444.0" layoutY="214.0" mnemonicParsing="false" onAction="#btInsertFired" prefHeight="35.0" prefWidth="83.0" text="Inserir" />
+        <TableView fx:id="tbFraccaoRubricaOrcamento" layoutX="201.0" layoutY="52.0" prefHeight="427.0" prefWidth="225.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="52.0">
+            <columns>
+                <TableColumn fx:id="clFraccao" prefWidth="58.0" text="Fração" /><TableColumn fx:id="clRubrica" prefWidth="164.0" text="Rubrica" />
+            </columns>
+        </TableView>
+        <ComboBox fx:id="cbFraccao" layoutX="377.0" layoutY="71.0" prefWidth="150.0" />
+        <Label layoutX="317.0" layoutY="75.0" text="Fração" />
+        <Button fx:id="btNova" layoutX="369.0" layoutY="214.0" mnemonicParsing="false" onAction="#btNewFired" prefHeight="35.0" prefWidth="71.0" text="Nova" />
+        <Button fx:id="btRemover" layoutX="369.0" layoutY="253.0" mnemonicParsing="false" onAction="#btRemoveFired" prefHeight="35.0" prefWidth="158.0" text="Remover" />
+        <Button fx:id="btProximo" layoutX="564.0" layoutY="412.0" mnemonicParsing="false" onAction="#btNextFired" prefHeight="53.0" prefWidth="149.0" text="Proximo Passo" />
+        <Label prefHeight="45.0" prefWidth="767.0" text="                  Neste Passo definimos para cada Fração as Rubricas associadas relativamente a este Orçamento." textAlignment="CENTER">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label><Button fx:id="btAnterior" layoutX="274.0" layoutY="412.0" mnemonicParsing="false" onAction="#btPreviousFired" prefHeight="53.0" prefWidth="149.0" text="Passo Anterior" /><ComboBox fx:id="cbRubrica" layoutX="377.0" layoutY="108.0" prefWidth="150.0" /><Label layoutX="316.0048828125" layoutY="112.0" text="Rubrica" /><Label fx:id="lbFraccao" layoutX="536.0" layoutY="75.0" styleClass="errorLabel" /><Label fx:id="lbRubrica" layoutX="536.0048828125" layoutY="112.0" styleClass="errorLabel" /><Label fx:id="lbInfo" layoutX="233.0" layoutY="44.0" prefHeight="17.0" prefWidth="381.0" />
+    </children>
+</AnchorPane>

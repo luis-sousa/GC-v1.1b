@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4559984a-0497-48f2-98a0-25dfe7f65106">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="48"/>
+	<style name="Title" fontName="SansSerif" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="SansSerif" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="SansSerif" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="SansSerif" fontSize="12"/>
+	<parameter name="texto" class="java.lang.String"/>
+	<parameter name="idOrc" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT f.codFracao, fo.fraccao, f.nome, f.permilagem, tbO.id, tbO.Ano, tbc.nome as nomeCondominio
+FROM
+      FraccaoOrcamento fo, Fraccao f, Orcamento tbO, Condominio tbC
+where fo.fraccao = f.codFracao and fo.idOrcamento = tbO.id  and tbo.id = $P{idOrc}
+ORDER BY fo.fraccao]]>
+	</queryString>
+	<field name="codFracao" class="java.lang.Object"/>
+	<field name="nome" class="java.lang.Object"/>
+	<field name="permilagem" class="java.lang.Float"/>
+	<field name="ano" class="java.lang.Object"/>
+	<field name="nomeCondominio" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="239" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="127" y="-11" width="263" height="33" uuid="3578cb34-9b6f-414c-87fa-ba59bdf1a934"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Condomínio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="197" y="77" width="222" height="23" forecolor="#416B9D" uuid="df87dfe1-3930-4b45-a39e-99d15622d3ef"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Folha de Presenças]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="136" width="555" height="103" uuid="15d444a7-cdb7-4d7a-b406-f14bcbf802f9"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{texto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Detail" x="0" y="111" width="100" height="17" forecolor="#696969" uuid="932941c7-0068-40e7-b333-41f597c36a55"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Texto:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="486" y="97" width="67" height="20" uuid="5d5020d5-5672-4920-a013-44ccb11688c4"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ano}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="257" y="22" width="298" height="23" uuid="047c6a47-6797-46cd-bc64-b875e38e2274"/>
+				<textElement>
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeCondominio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="390" y="97" width="96" height="20" uuid="a2d61f45-3611-4b49-b227-5f51deac098c"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Orçamento:]]></text>
+			</staticText>
+			<image scaleImage="RealSize" onErrorType="Blank">
+				<reportElement x="0" y="0" width="85" height="83" uuid="f244f7ea-4ee5-4541-8a2e-eba21d880757"/>
+				<imageExpression><![CDATA["report/logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="740ac15b-c0e2-4b39-bfcc-9bed2acaef66"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="61" height="17" uuid="aa35573c-8888-4b28-9ec7-c742e27b0a48"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Fração]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="61" y="19" width="280" height="17" uuid="65b3ac00-f967-454c-a287-6c72d8c0d2bc"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="341" y="19" width="92" height="17" uuid="59a71aa5-2ee5-47cc-93c8-959d0f7c6123"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Permilagem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="433" y="19" width="120" height="17" forecolor="#666666" uuid="1a4e3630-856f-4fe6-8317-4ff08e4325cd"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Assinatura]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="da86fb23-a5e4-42f6-8548-3b1903341bc2"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="61" height="16" uuid="5f679a8f-b54c-4c0f-82c6-5abe68c517f4"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{codFracao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="61" y="0" width="280" height="16" uuid="f92b1da0-3925-4775-8bfc-5ed7b7ec2b82"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="341" y="0" width="92" height="16" uuid="64278dc5-fca1-4ed9-a097-373fb5bfd03c"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{permilagem}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="b76065af-a77d-463b-a467-773ed76c8c5c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="67c70699-dfdc-41c5-9229-8377ea6a6a02"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="c4402461-b710-4a56-afc2-24884c787cb6"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="127" height="20" uuid="648175b3-8fed-458c-8a90-4386966771ae"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="127" y="0" width="306" height="20" uuid="fcf804b0-2e69-4a31-834c-eb550441eaec"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documento produzido e processado por computador]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

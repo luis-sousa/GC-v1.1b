@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c87d6cad-7ee2-42bb-b6fe-cb8bc21422c7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="SansSerif" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="SansSerif" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="SansSerif" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="SansSerif" fontSize="12"/>
+	<parameter name="idOrc" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ano" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT tAD.mes, tR.idRecibo, tR.data, tR.totalRecibo, tAD.codFraccao, tF.nome , tbO.ano, tC.nome AS nomeCondominio
+FROM 
+Recibo tR,
+ReciboLinha tRL,
+AvisoDebito tAD,
+Fraccao tF,
+Orcamento tbO,
+Condominio tC
+WHERE tR.idRecibo = tRL.idRecibo and tRL.idAvisoDebito = tAD.idAviso and
+tAD.codFraccao = tf.codFracao and tAD.idOrcamento = $P{idOrc} and tbO.ano=$P{ano}
+GROUP BY tAD.codFraccao, tAD.mes, tR.idRecibo
+ORDER BY tAD.codFraccao, tAD.mes]]>
+	</queryString>
+	<field name="mes" class="java.lang.Object"/>
+	<field name="idRecibo" class="java.lang.Object"/>
+	<field name="data" class="java.lang.Object"/>
+	<field name="totalRecibo" class="java.lang.Object"/>
+	<field name="codFraccao" class="java.lang.Object"/>
+	<field name="nome" class="java.lang.Object"/>
+	<field name="ano" class="java.lang.Object"/>
+	<field name="nomeCondominio" class="java.lang.Object"/>
+	<group name="codFraccao">
+		<groupExpression><![CDATA[$F{codFraccao}]]></groupExpression>
+		<groupHeader>
+			<band height="40">
+				<textField>
+					<reportElement style="SubTitle" x="47" y="13" width="506" height="24" forecolor="#416B9D" uuid="28cf7e3d-2fb1-49c1-93fa-197e493fd6de"/>
+					<textElement>
+						<font fontName="SansSerif" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Fração: "+$F{codFraccao}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="13" width="36" height="24" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="fd68e31f-1c6a-4a01-a901-32815061c0f2"/>
+				</rectangle>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="10"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="96" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="148" y="-10" width="263" height="33" uuid="7957e8e1-b0d5-4be4-98ed-4fc325da0bdc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Condomínio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="172" y="73" width="295" height="23" forecolor="#416B9D" uuid="4358b9d8-de60-4277-9fd2-9d5508596ebd"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resumo de Recebimentos]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Title" x="259" y="21" width="294" height="25" uuid="021ea2af-2a0f-4686-8ef6-b03f0150a313"/>
+				<textElement>
+					<font fontName="SansSerif" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeCondominio}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RealSize" onErrorType="Blank">
+				<reportElement x="0" y="0" width="85" height="83" uuid="9d7a7f8d-2f38-4201-ad45-586f584d433e"/>
+				<imageExpression><![CDATA["report/logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="50" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="45" width="555" height="1" uuid="8d7fd355-57c2-4da9-95e7-41d31b1d1c25"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="30" width="247" height="16" uuid="0b8ae754-5e64-4618-b2f0-d2b995c57089"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="247" y="30" width="73" height="16" uuid="150c9a5f-6283-4e7d-8305-97042122b681"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Nº Recibo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="320" y="30" width="91" height="16" uuid="09474d3d-6e67-4524-aa10-63779336c971"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Data Recibo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="411" y="30" width="88" height="16" uuid="5f0c52db-104e-4cd8-984c-1a71cb44be09"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Total Pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="499" y="30" width="54" height="16" uuid="19601708-6a45-4d65-bea6-cfce51cdb6f8"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Mês]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement style="Detail" x="513" y="0" width="65" height="16" uuid="c13c75fb-aa9d-4f35-b33d-3a6db5bf065d"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ano}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="433" y="0" width="80" height="16" uuid="8e72e0e2-b8ba-44e3-9523-28f0d475c0e3"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Orçamento:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="2e68593e-0449-4baa-ae06-e49b8c85eca0"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="247" height="16" uuid="a2c19c44-dad6-4e1a-a195-39ef31726455"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="247" y="0" width="58" height="16" uuid="08e79dbb-5b5a-4953-82e1-ce13562eca18"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{idRecibo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="320" y="0" width="74" height="16" uuid="ae1fe10b-85f9-4ed0-8ae0-d5bcc59fbf5b"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{data}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="411" y="0" width="73" height="16" uuid="5fe8e99c-8e91-4498-aca1-6f4a03a0202b"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalRecibo}/100+" €"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="499" y="0" width="69" height="16" uuid="5caf3862-d8d8-43b1-8343-edb9f6d5fff3"/>
+				<textFieldExpression><![CDATA[$F{mes}.equals(1) ? "Janeiro" : $F{mes}.equals(2) ? "Fevereiro"  : $F{mes}.equals(3) ? "Março" : $F{mes}.equals(4) ? "Abril" : $F{mes}.equals(5) ? "Maio" : $F{mes}.equals(6) ? "Junho": $F{mes}.equals(7) ? "Julho": $F{mes}.equals(8) ? "Agosto": $F{mes}.equals(9) ? "Setembro": $F{mes}.equals(10) ? "Outubro": $F{mes}.equals(11) ? "Novembro": $F{mes}.equals(12) ? "Dezembro":""]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="f4f031a9-13e6-401b-aad5-98a05a9f4ad2"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="0905debd-f8cd-4b39-b26c-c7ee3a9035d6"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="ecf1ef88-eab3-4cd9-bbd0-1aa1e60453b4"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="140" y="0" width="306" height="20" uuid="9a215265-3ff5-4bd9-a61c-84f43e0d6ba6"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documento produzido e processado por computador]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

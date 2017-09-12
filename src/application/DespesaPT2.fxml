@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="481.0" prefWidth="884.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DespesaControllerPT2">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+    <children>
+        <Button fx:id="btNova" layoutX="479.0" layoutY="245.0" mnemonicParsing="false" onAction="#btNewFired" prefHeight="33.0" prefWidth="70.0" text="Nova" /><TableView fx:id="tbDespesaOrcamento" layoutX="6.0" layoutY="61.0" prefHeight="420.0" prefWidth="315.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="61.0">
+  <columns>
+    <TableColumn fx:id="clDespesa" prefWidth="75.0" text="Despesa" />
+    <TableColumn fx:id="clRubrica" prefWidth="75.0" text="Rubrica" /><TableColumn fx:id="clData" prefWidth="83.0" text="Data" /><TableColumn fx:id="clMontante" prefWidth="78.0" text="Montante" />
+  </columns>
+</TableView><Label layoutX="239.0" layoutY="14.0" prefHeight="33.0" prefWidth="303.0" text="Adicione edite ou elimine despesas para este Orçamento" /><Label layoutX="341.0" layoutY="89.0" text="Despesa" /><Label layoutX="341.0" layoutY="122.0" text="Rubrica" /><Label layoutX="341.0" layoutY="160.0" text="Data" /><Label layoutX="340.0" layoutY="192.0" text="Montante" /><TextField fx:id="txtDespesa" layoutX="406.0" layoutY="85.0" prefHeight="17.0" prefWidth="239.0" /><ComboBox fx:id="cbRubrica" layoutX="406.0" layoutY="118.0" prefHeight="25.0" prefWidth="224.0" /><TextField fx:id="txtData" layoutX="407.0" layoutY="154.0" prefHeight="17.0" prefWidth="149.0" /><TextField fx:id="txtMontante" layoutX="407.0" layoutY="188.0" prefHeight="17.0" prefWidth="149.0" /><Button fx:id="btInserir" layoutX="555.0" layoutY="245.0" mnemonicParsing="false" onAction="#btInsertFired" prefHeight="33.0" prefWidth="76.0" text="Inserir" /><Button fx:id="btEditar" layoutX="479.0" layoutY="283.0" mnemonicParsing="false" onAction="#btEditFired" prefHeight="35.0" prefWidth="150.0" text="Editar" /><Button fx:id="btRemover" layoutX="480.0" layoutY="324.0" mnemonicParsing="false" onAction="#btRemoveFired" prefHeight="35.0" prefWidth="149.0" text="Remover" /><Button fx:id="btAnterior" layoutX="355.0" layoutY="407.0" mnemonicParsing="false" onAction="#btPreviousFired" prefHeight="43.0" prefWidth="109.0" text="Anterior" /><Label fx:id="lbDespesa" layoutX="654.0" layoutY="89.0" styleClass="errorLabel" /><Label fx:id="lbData" layoutX="568.0" layoutY="158.0" styleClass="errorLabel" /><Label fx:id="lbMontante" layoutX="568.0" layoutY="192.0" styleClass="errorLabel" />
+    </children>
+</AnchorPane>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="638.0" prefWidth="629.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GerarAvisoControllerPT2">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+    <children>
+        <Button fx:id="btGerar" layoutX="446.0" layoutY="357.0" mnemonicParsing="false" onAction="#btGerarFired" prefHeight="51.0" prefWidth="150.0" text="Gerar Avisos" />
+        <Button fx:id="btAnterior" layoutX="30.0" layoutY="566.0" mnemonicParsing="false" onAction="#btPreviousFired" prefHeight="43.0" prefWidth="115.0" text="Anterior" />
+        <Label layoutX="29.0" layoutY="76.0" text="Frações" />
+        <ListView fx:id="lvFraccoes" layoutX="29.0" layoutY="93.0" prefHeight="280.0" prefWidth="210.0" /> 
+        <ListView fx:id="lvMeses" layoutX="262.0" layoutY="93.0" prefHeight="280.0" prefWidth="136.0"> 
+            
+        </ListView>
+        <Label layoutX="262.0" layoutY="76.0" text="Meses" />
+        <ListView fx:id="lvLog" layoutX="30.0" layoutY="422.0" prefHeight="131.0" prefWidth="571.0" />
+        <Label layoutX="29.0048828125" layoutY="398.5" text="Info" />
+        <Label fx:id="lbOrcamentoInfo" layoutX="16.0" layoutY="14.0" prefHeight="36.0" prefWidth="594.0" text="Orçamento :">
+<font>
+<Font name="System Bold" size="12.0" />
+</font></Label><Label layoutX="428.0" layoutY="76.0" text="Dia Limite" /><TextField fx:id="txtDiaLimite" layoutX="428.0" layoutY="93.0" prefHeight="25.0" prefWidth="34.0" /><Button fx:id="btGerarExtra" layoutX="423.0" layoutY="566.0" mnemonicParsing="false" onAction="#btGerarExtraFired" prefHeight="43.0" prefWidth="178.0" text="Gerar Avisos Extra" AnchorPane.leftAnchor="423.0" />
+    </children>
+</AnchorPane>

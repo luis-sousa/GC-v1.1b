@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d531b11b-3cc7-4111-9f69-eb56a585bc8e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="SansSerif" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="SansSerif" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="SansSerif" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="SansSerif" fontSize="12"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["report/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idOrc" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT aD.codFraccao, rL.valorPago, tbO.ano, tbC.nome
+ FROM ReciboLinha rL, AvisoDebito aD, Orcamento tbO, Condominio tbC
+ WHERE rL.idAvisoDebito=aD.idAviso and aD.idOrcamento=$P{idOrc} and aD.idOrcamento = tbO.id
+ORDER BY aD.codFraccao]]>
+	</queryString>
+	<field name="codFraccao" class="java.lang.Object"/>
+	<field name="valorPago" class="java.lang.Object"/>
+	<field name="ano" class="java.lang.Object"/>
+	<field name="nome" class="java.lang.Object"/>
+	<variable name="somaPago" class="java.lang.Float" resetType="Group" resetGroup="codFraccao" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorPago}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="totalAvisos" class="java.lang.Float" resetType="Group" resetGroup="codFraccao" calculation="System">
+		<variableExpression><![CDATA[]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="saldo" class="java.lang.Float" resetType="Group" resetGroup="codFraccao">
+		<variableExpression><![CDATA[$V{somaPago} - $V{totalAvisos}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="codFraccao">
+		<groupExpression><![CDATA[$F{codFraccao}]]></groupExpression>
+		<groupHeader>
+			<band height="107">
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="13" width="36" height="24" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="0e231c83-98fd-40c5-b5b2-0759ddf4ebbc"/>
+				</rectangle>
+				<textField evaluationTime="Auto">
+					<reportElement style="SubTitle" x="47" y="15" width="506" height="24" forecolor="#416B9D" uuid="cbc2a6fe-c9cd-4134-bc08-1f501121be1c"/>
+					<textElement>
+						<font fontName="SansSerif" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""+$F{codFraccao}]]></textFieldExpression>
+				</textField>
+				<subreport>
+					<reportElement x="108" y="39" width="40" height="40" uuid="92ebefd3-c027-447e-90d0-b916c247fb61"/>
+					<subreportParameter name="idOrc">
+						<subreportParameterExpression><![CDATA[$P{idOrc}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="codFraccaoPR">
+						<subreportParameterExpression><![CDATA[$F{codFraccao}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<returnValue subreportVariable="totalAvisos" toVariable="totalAvisos"/>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Resumo de Contas_subreport1.jasper"]]></subreportExpression>
+				</subreport>
+				<staticText>
+					<reportElement style="Column header" x="1" y="80" width="107" height="16" uuid="5c94720d-16f4-4334-a5f9-a6bdbfdc7b21"/>
+					<textElement>
+						<font fontName="SansSerif"/>
+					</textElement>
+					<text><![CDATA[Total de Avisos]]></text>
+				</staticText>
+				<textField evaluationTime="Auto">
+					<reportElement style="Detail" x="108" y="80" width="104" height="16" uuid="3b628a8f-11f2-45c8-b049-0298b6c3a28d"/>
+					<textElement>
+						<font fontName="SansSerif" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalAvisos}/100+ " €"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="Column header" x="422" y="80" width="44" height="16" uuid="57211a5b-d527-429c-a7bb-36a4c92b1e29"/>
+					<textElement>
+						<font fontName="SansSerif"/>
+					</textElement>
+					<text><![CDATA[Saldo]]></text>
+				</staticText>
+				<textField evaluationTime="Auto">
+					<reportElement style="Detail" x="468" y="79" width="88" height="16" uuid="a6722abc-18d4-43af-b512-00cd3cda7d0f"/>
+					<textElement>
+						<font fontName="SansSerif" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{saldo}/100+ " €"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="Column header" x="212" y="79" width="75" height="16" uuid="caa2d745-ca15-4abb-a4b3-dd61f0381a2d"/>
+					<textElement>
+						<font fontName="SansSerif"/>
+					</textElement>
+					<text><![CDATA[Total Pago]]></text>
+				</staticText>
+				<textField evaluationTime="Auto" pattern="">
+					<reportElement style="Detail" x="286" y="79" width="100" height="16" uuid="9edebf98-84e5-4cbb-b166-f068cbad1987"/>
+					<textElement>
+						<font fontName="SansSerif" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{somaPago}/100+ " €"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement positionType="FixRelativeToBottom" x="1" y="95" width="555" height="1" uuid="643f6859-1bd8-409b-9ffd-3d4913b8ec2e"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#999999"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="95" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="86" y="0" width="323" height="33" uuid="f6774372-550a-49d0-a43b-83a2cc100faa"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Condomínio]]></text>
+			</staticText>
+			<image scaleImage="RealSize" onErrorType="Blank">
+				<reportElement x="1" y="0" width="85" height="83" uuid="203d0609-bb71-4981-9f34-4fe70ff421ac"/>
+				<imageExpression><![CDATA["report/logo.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement style="SubTitle" x="186" y="72" width="354" height="23" forecolor="#416B9D" uuid="4df71761-ef11-424a-a613-e6cf117367c9"/>
+				<textElement>
+					<font fontName="SansSerif" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Resumo de Contas "+$F{ano}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="186" y="33" width="367" height="21" uuid="34071dbd-ad39-41bc-895e-2c11a526af84"/>
+				<textElement>
+					<font fontName="SansSerif" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="33" width="555" height="1" uuid="13a2e1a8-6027-4b42-9c61-95c7f777eb56"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="12fc906c-08e8-43c1-a3d6-227cb5af0e53"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="157ed569-44eb-4e12-9397-a083590b6d2d"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="108" height="20" uuid="13c7c902-35ac-4dea-8e7b-a18447c28026"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="127" y="0" width="306" height="20" uuid="94717835-efb1-4c84-9ece-980ef231db0c"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documento produzido e processado por computador]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

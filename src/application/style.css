@@ -1,0 +1,41 @@
+/*.button:focus{
+    -fx-background-color: -fx-focus-color,-fx-box-border,-fx-control-inner-background;
+    -fx-background-insets: -1.4, 0, 1;
+    -fx-background-radius: 1.4, 0, 0;
+    ....
+    -fx-padding: 1;  0.083333em; 
+}
+
+
+
+.table-view:focused {
+    -fx-background-color: -fx-focus-color,-fx-box-border,-fx-control-inner-background;
+    -fx-background-insets: -1.4, 0, 1;
+    -fx-background-radius: 1.4, 0, 0;
+    ....
+    -fx-padding: 1;  0.083333em; 
+}*/
+
+/*.button {
+    -fx-focus-color: transparent;
+}*/
+
+.root {
+    -fx-base: rgb(191, 218, 248);
+    -fx-background: rgb(215, 232, 250);
+}
+
+/*.errorTextField {
+        -fx-background-color: #ffbbbb;
+        -fx-border-color: #f00;
+}*/
+
+.errorTextField{           
+    -fx-background-color: red,linear-gradient(to bottom, derive(red,60%) 5%,derive(red,90%) 40%);
+    -fx-border-color:red;
+
+}
+
+.errorLabel{
+    -fx-text-fill: red;
+}

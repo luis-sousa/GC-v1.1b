@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" mouseTransparent="true" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AboutController">
+<children><ImageView fitHeight="390.0" fitWidth="200.0" layoutX="22.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="126.0" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="74.0">
+<image>
+<Image url="@../images/house.png" />
+</image></ImageView><Label layoutX="272.0" layoutY="26.0" prefHeight="17.0" prefWidth="169.0" text="Gestor de Condomínio ">
+<font>
+<Font name="System Bold" size="13.0" />
+</font></Label><Label layoutX="272.0" layoutY="66.0" prefHeight="17.0" prefWidth="79.0" text="CodeName">
+<font>
+<Font name="System Bold" size="12.0" />
+</font>
+</Label><Label layoutX="272.0" layoutY="106.0" prefHeight="17.0" prefWidth="48.0" text="Versão">
+<font>
+<Font name="System Bold" size="12.0" />
+</font>
+</Label><Label layoutX="272.0" layoutY="141.0" prefHeight="17.0" prefWidth="62.0" text="Freeware" /><Label layoutX="272.0" layoutY="174.0" prefHeight="17.0" prefWidth="101.0" text="Elaborado por:">
+<font>
+<Font name="System Bold" size="12.0" />
+</font></Label><Label layoutX="374.0" layoutY="174.0" prefHeight="17.0" prefWidth="169.0" text="8090228@estgf.ipp.pt" /><TextArea editable="false" layoutX="265.0" layoutY="200.0" prefHeight="149.0" prefWidth="315.0" text="Programa gratuíto de Gestão de Condomínios.&#10;Elaborado na disciplina de Projeto Final 2013/14 &#10;da ESTGF pelo aluno Luís Sousa nº 8090228.&#10;Ao utilizar este programa é da sua responsabilidade &#10;todos os riscos que daí possam surgir.&#10;&#10;" wrapText="true" AnchorPane.leftAnchor="265.0" /><Label layoutX="351.0" layoutY="66.0" prefHeight="17.0" prefWidth="32.0" text="GC" /><Label layoutX="328.0" layoutY="106.0" prefHeight="17.0" prefWidth="248.0" text="1.1b compilado em 20/01/2016" />
+</children></AnchorPane>

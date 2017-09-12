@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="479.0" prefWidth="781.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DespesaControllerPT1">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+    <children>
+        <Button fx:id="btProximo" layoutX="564.0" layoutY="412.0" mnemonicParsing="false" onAction="#btNextFired" prefHeight="53.0" prefWidth="149.0" text="Proximo Passo" />
+        <TableView fx:id="tbOrcamento" layoutX="241.0" layoutY="81.0" prefHeight="278.0" prefWidth="237.0">
+            <columns>
+                <TableColumn fx:id="clVersao" prefWidth="75.0" text="Versao" />
+                <TableColumn fx:id="clAno" prefWidth="75.0" text="Ano" />
+                <TableColumn fx:id="clData" prefWidth="84.0" text="Data" />
+            </columns>
+        </TableView>
+        <Label layoutX="207.0" layoutY="14.0" prefHeight="33.0" prefWidth="335.0" text="Selecione o Orçamento em que deseja gerir o Mapa Despesas" />
+    </children>
+</AnchorPane>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="479.0" prefWidth="871.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrcamentoControllerPT0">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+    <children>
+        <Button fx:id="btInserir" layoutX="442.0" layoutY="214.0" mnemonicParsing="false" onAction="#btInsertFired" prefHeight="35.0" prefWidth="85.0" text="Inserir" />
+        <TableView fx:id="tbOrcamento" prefHeight="432.0" prefWidth="285.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="47.0">
+            <columns>
+                <TableColumn fx:id="clVersao" prefWidth="70.0" text="Versao" />
+                <TableColumn fx:id="clAno" prefWidth="49.0" text="Ano" />
+                <TableColumn fx:id="clData" prefWidth="72.0" text="Data" />
+                <TableColumn fx:id="clEstado" prefWidth="92.0" text="Estado" />
+            </columns>
+        </TableView>
+        <Label layoutX="311.0" layoutY="51.0" text="Versão" AnchorPane.leftAnchor="311.0" />
+        <TextField fx:id="txtAno" layoutX="378.0" layoutY="80.0" AnchorPane.leftAnchor="378.0" />
+        <TextField fx:id="txtData" layoutX="378.0" layoutY="112.0" AnchorPane.leftAnchor="378.0" />
+        <Label layoutX="326.0" layoutY="84.0" text="Ano" AnchorPane.leftAnchor="311.0" />
+        <Label layoutX="325.0" layoutY="117.0" text="Data" AnchorPane.leftAnchor="311.0" />
+        <Button fx:id="btNovo" layoutX="368.0" layoutY="214.0" mnemonicParsing="false" onAction="#btNewFired" prefHeight="35.0" prefWidth="70.0" text="Novo" AnchorPane.leftAnchor="368.0" />
+        <Button fx:id="btEditar" layoutX="368.0" layoutY="253.0" mnemonicParsing="false" onAction="#btEditFired" prefHeight="35.0" prefWidth="159.0" text="Editar" AnchorPane.leftAnchor="368.0" />
+        <Button fx:id="btRemover" layoutX="368.0" layoutY="292.0" mnemonicParsing="false" onAction="#btRemoveFired" prefHeight="35.0" prefWidth="159.0" text="Remover" AnchorPane.leftAnchor="368.0" />
+        <Button fx:id="btProximo" layoutX="564.0" layoutY="412.0" mnemonicParsing="false" onAction="#btNextFired" prefHeight="53.0" prefWidth="149.0" text="Proximo Passo" AnchorPane.leftAnchor="564.0" AnchorPane.topAnchor="412.0" />
+        <Label prefHeight="45.0" prefWidth="767.0" text="                                                  Seleccione um Orçamento ou Crie um Novo e Prossiga." textAlignment="CENTER">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtVersao" layoutX="378.0" layoutY="47.0" AnchorPane.leftAnchor="378.0" />
+        <Label layoutX="319.0" layoutY="149.0" text="Estado" AnchorPane.leftAnchor="311.0" />
+        <Label fx:id="lbVersao" layoutX="556.0" layoutY="51.0" styleClass="errorLabel" />
+        <Label fx:id="lbAno" layoutX="556.0" layoutY="84.0" styleClass="errorLabel" />
+        <Label fx:id="lbData" layoutX="556.0" layoutY="116.0" styleClass="errorLabel" />
+        <ComboBox fx:id="cbEstado" layoutX="378.0" layoutY="144.0" prefWidth="150.0" AnchorPane.leftAnchor="378.0">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Proposta" />
+                    <String fx:value="Definitivo" />
+                </FXCollections>
+            </items>
+        </ComboBox><Label fx:id="lbEstado" layoutX="542.0" layoutY="149.0" styleClass="errorLabel" />
+    </children>
+</AnchorPane>

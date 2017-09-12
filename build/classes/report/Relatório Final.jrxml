@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" scriptletClass="report.MyScriptlet" uuid="487abfe9-f313-4f08-9196-814842803747">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="94"/>
+	<style name="Title" fontName="SansSerif" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="SansSerif" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="SansSerif" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="SansSerif" fontSize="12"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#E6F3FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#F8FCFF"/>
+		</conditionalStyle>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#E6F3FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="ReceitasDataset" uuid="3ed83723-44dc-4887-80ff-132b26694fd2">
+		<parameter name="idOrc" class="java.lang.Integer"/>
+		<queryString>
+			<![CDATA[SELECT tbF.nome,tbFQO.fraccao,tbFQO.qAnual
+FROM
+FraccaoQuotasOrcamento tbFQO, Fraccao tbF
+WHERE tbFQO.idOrcamento = $P{idOrc} and tbFQO.fraccao = tbF.codFracao]]>
+		</queryString>
+		<field name="nome" class="java.lang.Object"/>
+		<field name="fraccao" class="java.lang.String"/>
+		<field name="qAnual" class="java.lang.Float"/>
+		<variable name="desvio" class="java.lang.Float">
+			<variableExpression><![CDATA[]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="efectivo" class="java.lang.Float">
+			<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.getReceitas($P{idOrc} , $F{fraccao})]]></variableExpression>
+		</variable>
+		<variable name="totalOrcamentado" class="java.lang.Float" calculation="Sum">
+			<variableExpression><![CDATA[$F{qAnual}]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="totalEfectivo" class="java.lang.Float" calculation="Sum">
+			<variableExpression><![CDATA[$V{efectivo}]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="totalDesvio" class="java.lang.Float">
+			<variableExpression><![CDATA[$V{totalEfectivo} - $V{totalOrcamentado}]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="DespesasDataSet" uuid="78c2aa59-28e0-4441-90a8-92a754b1d327">
+		<parameter name="idOrc" class="java.lang.Integer"/>
+		<queryString>
+			<![CDATA[SELECT tbRO.nome, tbRO.valor
+FROM Rubricaorcamento tbRO
+WHERE tbRO.idOrcamento = $P{idOrc}]]>
+		</queryString>
+		<field name="nome" class="java.lang.String"/>
+		<field name="valor" class="java.lang.Float"/>
+		<variable name="efectivo" class="java.lang.Float">
+			<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.getDespesas($P{idOrc} , $F{nome})]]></variableExpression>
+		</variable>
+		<variable name="desvio" class="java.lang.Float">
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="totalOrcamentado" class="java.lang.Float" calculation="Sum">
+			<variableExpression><![CDATA[$F{valor}]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="totalEfectivo" class="java.lang.Float" calculation="Sum">
+			<variableExpression><![CDATA[$V{efectivo}]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="totalDesvio" class="java.lang.Float">
+			<variableExpression><![CDATA[$V{totalOrcamentado} - $V{totalEfectivo}]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+	</subDataset>
+	<parameter name="idOrc" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT tbC.nome, tbO.ano
+FROM Condominio tbC, Orcamento tbO
+WHERE tbO.id = $P{idOrc}]]>
+	</queryString>
+	<field name="nome" class="java.lang.Object"/>
+	<field name="ano" class="java.lang.Object"/>
+	<variable name="totalReceitas" class="java.lang.Float">
+		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.totalReceitas($P{idOrc})]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="totalDespesas" class="java.lang.Float">
+		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.totalDespesas($P{idOrc})]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="saldo" class="java.lang.Float">
+		<variableExpression><![CDATA[$V{totalReceitas} - $V{totalDespesas}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="94" splitType="Stretch">
+			<image scaleImage="RealSize" onErrorType="Blank">
+				<reportElement x="0" y="0" width="85" height="83" uuid="22c8c3ab-7803-4927-be8b-8032dfe0b652"/>
+				<imageExpression><![CDATA["report/logo.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="181" y="33" width="374" height="31" uuid="e5e67b41-dbbe-4d4f-886d-c0f76ba065dd"/>
+				<textElement>
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="SubTitle" x="181" y="64" width="372" height="30" forecolor="#416B9D" uuid="e89c9a2e-f64a-43f7-9505-de686cc28480"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Relatório Final "+$F{ano}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Title" x="85" y="0" width="180" height="33" uuid="7f21f1e5-845f-4dc8-a888-247c8dec6293"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Condomínio]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="1" y="0" width="555" height="1" uuid="8c7fbffe-af79-43c2-a841-d35d267f8943"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="227" splitType="Stretch">
+			<elementGroup/>
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="32" width="360" height="118" uuid="a945a629-6c8a-4bfb-b371-4027f4422eca"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="ReceitasDataset" uuid="af551ed3-6f68-4a50-b1f1-c2461f7eabf8">
+						<datasetParameter name="idOrc">
+							<datasetParameterExpression><![CDATA[$P{idOrc}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="REPORT_SCRIPTLET">
+							<datasetParameterExpression><![CDATA[$P{REPORT_SCRIPTLET}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="f7658726-7c82-4251-9110-8d1181f60d1f">
+						<jr:columnHeader style="table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="12" y="0" width="78" height="30" uuid="0eb9817e-df30-4217-9287-daf7050f6e63"/>
+								<textElement>
+									<font fontName="SansSerif" size="13" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Nome]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="12" y="0" width="78" height="20" uuid="37bbfcb3-4f84-4d25-9b67-a5c48e1d6987"/>
+								<textElement>
+									<font fontName="SansSerif"/>
+								</textElement>
+								<textFieldExpression><![CDATA[""+$F{nome}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="e652d4d6-15eb-4a6f-bd97-8755c6bbbe1f">
+						<jr:columnHeader style="table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="11" y="0" width="79" height="30" uuid="b6562259-d3cf-4d05-a5f3-1f1b46113a85"/>
+								<textElement>
+									<font fontName="SansSerif" size="13" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Fração]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="51" y="10" width="39" height="20" uuid="ae66d48b-7517-43d4-bc3e-529d49960701"/>
+								<textElement>
+									<font fontName="SansSerif" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Totais]]></text>
+							</staticText>
+						</jr:columnFooter>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="11" y="0" width="79" height="20" uuid="25558221-1748-4876-b538-f436d3037435"/>
+								<textElement>
+									<font fontName="SansSerif"/>
+								</textElement>
+								<textFieldExpression><![CDATA[""+$F{fraccao}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="118" uuid="c52b20c2-b5ff-4da1-a00e-3953652b0060">
+						<jr:columnHeader style="table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="13" y="0" width="105" height="30" uuid="889c1322-523a-4afc-99aa-5e6bc30e960f"/>
+								<textElement>
+									<font fontName="SansSerif" size="13" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Orçamentado]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="13" y="10" width="77" height="20" uuid="c84907ee-6d31-4bcf-861e-912527cf6497"/>
+								<textElement>
+									<font fontName="SansSerif"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{totalOrcamentado}/100+" €"]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="13" y="0" width="77" height="20" uuid="bcbc4a49-3fb3-41ca-b45f-e1ebacf2e8c5"/>
+								<textElement>
+									<font fontName="SansSerif"/>
+								</textElement>
+								<textFieldExpression><![CDATA[""+$F{qAnual}/100+" €"]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="c2820571-47eb-44cb-b503-e83d17ad1695">
+						<jr:columnHeader style="table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="12" y="0" width="78" height="30" uuid="9530556d-eba4-4229-be81-2146b9a8581b"/>
+								<textElement>
+									<font fontName="SansSerif" size="13" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Efetivo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="12" y="10" width="78" height="20" uuid="86a4bb0d-6a98-40a7-b4e0-af3eb8a0225c"/>
+								<textElement>
+									<font fontName="SansSerif"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{totalEfectivo}/100+" €"]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="table 1_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="12" y="0" width="78" height="20" uuid="a0438fff-1868-49bc-8b36-553e6aa290a7"/>
+								<textElement>
+									<font fontName="SansSerif"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$P{REPORT_SCRIPTLET}.getReceitas($P{idOrc} , $F{fraccao})/100+" €"]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="6d661ed1-a596-4e24-900e-cdc878613ad7">
+						<jr:columnHeader style="table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="13" y="0" width="77" height="30" uuid="e61a2206-eded-4a00-8e34-5071f236f0d3"/>
+								<textElement>
+									<font fontName="SansSerif" size="13" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Desvio]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="13" y="10" width="77" height="20" uuid="5d71ef6c-9c76-4789-8080-15b3c6e86cfe"/>
+								<textElement>
+									<font fontName="SansSerif"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{totalDesvio}/100+" €"]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="table 1_TD" height="30" rowSpan="1">
+							<textField pattern="¤ #,##0.00">
+								<reportElement x="13" y="0" width="77" height="20" uuid="2878a32e-7972-4d7b-b1b9-944f24327594"/>
+								<textElement>
+									<font fontName="SansSerif"/>
+								</textElement>
+								<textFieldExpression><![CDATA[($V{efectivo} - $F{qAnual})/100+" €"]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement style="SubTitle" x="1" y="0" width="100" height="23" uuid="fe0fb7c7-a385-4b7e-8020-806e4a31b2d8"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Receitas]]></text>
+			</staticText>
+		</band>
+		<band height="117">
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="1" y="38" width="360" height="67" uuid="72d39028-b1cb-45fd-94d4-fb3811aa4478"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="DespesasDataSet" uuid="5ec9d541-77f6-4c95-93de-b82323a3ec13">
+						<datasetParameter name="idOrc">
+							<datasetParameterExpression><![CDATA[$P{idOrc}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="REPORT_SCRIPTLET">
+							<datasetParameterExpression><![CDATA[$P{REPORT_SCRIPTLET}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="215" uuid="9ae540e4-ed0b-46a4-b9ed-4c7208a7d287">
+						<jr:columnHeader style="table 1_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="12" y="0" width="203" height="30" uuid="4bb31157-cf2a-4fca-bcbf-904374bd7f4a"/>
+								<textElement>
+									<font size="13" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Rubrica]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="174" y="10" width="41" height="20" uuid="44b21a19-418c-4536-8a63-fc10d4cc5993"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Totais]]></text>
+							</staticText>
+						</jr:columnFooter>
+						<jr:detailCell style="table 1_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="12" y="0" width="203" height="20" uuid="1349133c-421e-4323-b762-267b653a12ad"/>
+								<textFieldExpression><![CDATA[""+$F{nome}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="131" uuid="02ca960e-06e5-4e27-a234-d5c5b0fc99f7">
+						<jr:columnHeader style="table 1_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="15" y="0" width="100" height="30" uuid="f11d5181-9c96-4708-bd59-999dec1b3b81"/>
+								<textElement>
+									<font size="13" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Orçamentado]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="15" y="10" width="75" height="20" uuid="a1fc72b7-e905-44e2-a8f5-5eb7e87b2167"/>
+								<textFieldExpression><![CDATA[$V{totalOrcamentado}/100+" €"]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="table 1_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="15" y="0" width="90" height="20" uuid="253e5ea6-8abb-44bb-ba5e-d3015f5c45db"/>
+								<textFieldExpression><![CDATA[""+$F{valor}/100+" €"]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="073970ea-fdde-4e5c-918a-85e09aecf9a8">
+						<jr:columnHeader style="table 1_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="12" y="0" width="78" height="30" uuid="d0dd749a-7c8e-4356-a12d-de32cdc552fd"/>
+								<textElement>
+									<font size="13" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Efetivo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="12" y="10" width="78" height="20" uuid="8373360e-2252-4821-8f15-9d4e1396c5f1"/>
+								<textFieldExpression><![CDATA[$V{totalEfectivo}/100+" €"]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="table 1_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="12" y="0" width="78" height="20" uuid="03968766-a081-484b-a00b-e77fd81d2b58"/>
+								<textFieldExpression><![CDATA[$P{REPORT_SCRIPTLET}.getDespesas($P{idOrc} , $F{nome})/100+" €"]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="111" uuid="bb1e59e8-c90d-48b5-938f-dee8e973262d">
+						<jr:columnHeader style="table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="15" y="0" width="90" height="30" uuid="a92ac738-595e-4503-a40e-edb1746164c7"/>
+								<textElement>
+									<font size="13" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Desvio]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_TD" height="30" rowSpan="1">
+							<textField pattern="">
+								<reportElement x="15" y="10" width="75" height="20" uuid="577fa3ff-070b-4cd5-8f36-9fe381a886e6"/>
+								<textFieldExpression><![CDATA[$V{totalDesvio}/100+" €"]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="table 1_TD" height="30" rowSpan="1">
+							<textField pattern="¤ #,##0.00">
+								<reportElement x="15" y="0" width="90" height="20" uuid="f8562408-ba3b-43c1-b68a-a92b518dbde8"/>
+								<textFieldExpression><![CDATA[($F{valor} - $V{efectivo})/100 +" €"]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement style="SubTitle" x="1" y="0" width="100" height="23" uuid="50566c44-16ce-4779-b372-ebdf92eb96ea"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Despesas]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="171" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="33" width="555" height="1" uuid="ff2eb90f-d93a-4781-9dcb-cab1abbc2b4f"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="SubTitle" x="0" y="12" width="101" height="23" uuid="3d7d9e9a-148b-40ce-9348-f192e2943120"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Resumo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Detail" x="0" y="52" width="85" height="20" uuid="437a1f6e-9624-405a-901b-11d52865c02f"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Receitas Efectivas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Detail" x="0" y="72" width="85" height="20" uuid="bbf78395-1a38-4e21-8095-fc1f82ab2c8a"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Despesas Efectivas]]></text>
+			</staticText>
+			<textField pattern="###0.00">
+				<reportElement x="85" y="52" width="435" height="20" uuid="743fc2e3-9fe1-4caf-afb9-6145e5711c78"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_SCRIPTLET}.totalReceitas($P{idOrc})/100+" €"]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="85" y="72" width="435" height="20" uuid="1ad5f022-281f-4dd0-a77b-f14c2498f087"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_SCRIPTLET}.totalDespesas($P{idOrc})/100+" €"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Detail" x="27" y="92" width="41" height="20" uuid="d9c6856a-3645-4097-8850-f20b864056d4"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo]]></text>
+			</staticText>
+			<textField pattern="###0.00">
+				<reportElement x="85" y="92" width="435" height="20" uuid="c9cf7030-7035-4882-8eb4-ea3adfd736e6"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{saldo}/100+" €"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="e3b6de26-629a-418f-be02-39c314d863a5"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="03617329-7821-4f8d-ab56-9f1092f8ab90"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="c2fe348d-3b68-4b77-a827-630c8f2fec5e"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="139" y="0" width="304" height="20" uuid="893775cf-89ad-495f-bb5d-71b01b0a5137"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documento produzido e processado por computador]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

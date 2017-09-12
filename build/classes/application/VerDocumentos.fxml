@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="760.0" prefWidth="700.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VerDocumentosController">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+    <children>
+        <StackPane fx:id="pane" layoutX="23.0" layoutY="206.0" prefHeight="716.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0" /><Label layoutX="23.0" layoutY="14.0" text="Documento" /><Label layoutX="353.0" layoutY="14.0" text="Orçamento" /><ComboBox fx:id="cbDocumentos" layoutX="115.0" layoutY="9.0" prefHeight="27.0" prefWidth="217.0" /><ComboBox fx:id="cbOrcamento" layoutX="444.0" layoutY="9.0" prefHeight="27.0" prefWidth="150.0" /><Button fx:id="btVer" layoutX="618.0" layoutY="9.0" mnemonicParsing="false" onAction="#btVerFired" prefHeight="27.0" prefWidth="68.0" text="Ver" />
+    </children>
+</AnchorPane>
